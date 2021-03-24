@@ -2,5 +2,9 @@
     "elements": {
         "form": {}
     },
-    "attributes": {}
+    "attributes": {
+        "text-decoration:": {
+            "context": "h1"
+        }
+    }
 }
