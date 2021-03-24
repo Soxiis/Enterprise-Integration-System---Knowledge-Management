@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BusinessObject;
+package Util;
 
 /**
  *
  * @author gabys
  */
-public class Administrator {
+public class Role {
     
 }

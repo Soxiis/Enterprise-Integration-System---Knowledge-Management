@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BusinessObject;
+package Util;
+import java.sql.*;
+
 
 /**
  *
  * @author gabys
  */
-public class Editor {
+public class DAO {
+    
+    private String _url;
+    private Connection _connection;
+ 
     
 }
