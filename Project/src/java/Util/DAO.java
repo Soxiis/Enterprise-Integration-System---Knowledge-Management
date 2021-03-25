@@ -15,6 +15,8 @@ public class DAO {
     
     private String _url;
     private Connection _connection;
- 
     
+    public void GetUser(){
+        
+    }    
 }
