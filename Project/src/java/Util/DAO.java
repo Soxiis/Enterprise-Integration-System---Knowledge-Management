@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package Util;
+
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -13,10 +16,22 @@ import java.sql.*;
  */
 public class DAO {
     
-    private String _url;
+    private final String _url="dbc:mysql://51.83.42.138:3306/database?user=root&password=root";
     private Connection _connection;
+    
+    public Connection connect(){
+        try {
+            _connection = DriverManager.getConnection("jdbc:mysql://51.83.42.138:3306/database?" + "user=root&password=root");
+            System.out.println("Bienvenue sur internet");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return _connection;
+    }
     
     public void GetUser(){
         
     }    
+    
+ 
 }
