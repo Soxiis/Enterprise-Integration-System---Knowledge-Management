@@ -6,6 +6,8 @@ package Servlet;
  * and open the template in the editor.
  */
 
+import BusinessObject.User;
+import Util.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,13 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author gabys
  */
-public class AuthenficationServlet extends HttpServlet {
+public class AuthentificationServlet extends HttpServlet {
     
+    private DAO _dao;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -75,10 +79,24 @@ public class AuthenficationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            boolean isConnect = false;
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
-            
-            response.sendRedirect("/HomeServlet");
+            _dao = DAO.getInstance();
+            if (userName.isEmpty() || password.isEmpty())
+                request.getSession().setAttribute("error", "emptyFiel");
+            else
+                if (_dao.userExists(userName, password))
+                    isConnect = connect(request, userName, password);
+                else{
+                    request.getSession().setAttribute("error", "user");
+                }
+            if (isConnect)
+                response.sendRedirect(getServletContext()+"/HomeServlet");
+            else{
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/AuthentificationView.jsp");
+                dispatcher.forward(request, response);
+            } 
     }
 
     /**
@@ -90,5 +108,18 @@ public class AuthenficationServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private boolean connect(HttpServletRequest request, String username, String password ) {
+
+        User user = _dao.GetUser(username, password);
+        if(user != null || !user.getFirstName().equals("") ){
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 }

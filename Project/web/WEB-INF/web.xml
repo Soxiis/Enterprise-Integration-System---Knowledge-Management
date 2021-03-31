@@ -5,8 +5,8 @@
         <servlet-class>Servlet.NewServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AuthenficationServlet</servlet-name>
-        <servlet-class>Servlet.AuthenficationServlet</servlet-class>
+        <servlet-name>AuthentificationServlet</servlet-name>
+        <servlet-class>Servlet.AuthentificationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -17,8 +17,8 @@
         <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AuthenficationServlet</servlet-name>
-        <url-pattern>/AuthenficationServlet</url-pattern>
+        <servlet-name>AuthentificationServlet</servlet-name>
+        <url-pattern>/AuthentificationServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>

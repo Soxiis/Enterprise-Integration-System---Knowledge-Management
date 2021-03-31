@@ -14,24 +14,30 @@
     <body>
         <h1>Authentification</h1>
  
-      <p style="color: red;">${errorString}</p>
+    <%! String s1 = ""; %>
+    <% s1 = session.getAttribute("error") == null ? "" : (String) session.getAttribute("error"); %>
+    <% if(s1.equals("emptyFiel")){ %>
+        <p style="color : red">A field is empty.</div>
+    <% }else if(s1.equals("user")){ %>
+        <div class="besideemailbox" style="color : red">The informations is invalid.</div>
+    <% } %>
  
-      <form method="POST" action="${pageContext.request.contextPath}/login">
-         <input type="hidden" name="redirectId" value="${param.redirectId}" />
+      <form method="POST" action="${pageContext.request.contextPath}/AuthentificationServlet">
+         <input type="hidden" name="redirectId"/>
          <table border="0">
             <tr>
                <td>User Name</td>
-               <td><input type="text" name="userName" value= "${user.userName}" /> </td>
+               <td><input type="text" name="userName" /> </td>
             </tr>
             <tr>
                <td>Password</td>
-               <td><input type="password" name="password" value= "${user.password}" /> </td>
+               <td><input type="password" name="password"/> </td>
             </tr>
           
             <tr>
                <td colspan ="2">
                   <input type="submit" value= "Submit" />
-                  <a href="${pageContext.request.contextPath}/">Cancel</a>
+                  <a href="${pageContext.request.contextPath}/AuthenficationServlet">Cancel</a>
                </td>
             </tr>
          </table>
