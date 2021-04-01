@@ -20,6 +20,22 @@ public class User {
     private String _lastName = "";
     private String _firstName = "";
     private Role _role;
+
+    public String getUserName() {
+        return _userName;
+    }
+
+    public void setUserName(String _userName) {
+        this._userName = _userName;
+    }
+
+    public String getPassword() {
+        return _password;
+    }
+
+    public void setPassword(String _password) {
+        this._password = _password;
+    }
     private String _adresse = "";
     private String _mail  = "";
     private String _phone  = "";
@@ -45,8 +61,8 @@ public class User {
     }
         public User(int _id, String _userName, String _password) {
         this._id = _id;
-        this._lastName = _lastName;
-        this._firstName = _firstName;
+        this._userName = _userName;
+        this._password = _password;
     }
     
     

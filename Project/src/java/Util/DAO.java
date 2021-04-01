@@ -67,8 +67,8 @@ public class DAO {
             _connection = DriverManager.getConnection("jdbc:mysql://51.83.42.138:3306/database?user=root&password=password");
             Statement stmt = _connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             result = stmt.executeQuery(request);
-            int i = result.getRow();
-            if (i >= i)
+            boolean b = result.next();
+            if (b)
                 return true;
             else
                 return false;
@@ -80,6 +80,7 @@ public class DAO {
 
     private User resultatSetToUser(ResultSet result) throws SQLException{
         result.next();
+        String g = result.getString("userName");
         User user = new User(result.getInt("id"),result.getString("userName"), result.getString("password"));
         return user;
     }

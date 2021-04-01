@@ -47,7 +47,7 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                request.setAttribute("Categories", _categories);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,6 +62,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                        request.setAttribute("Categories", _categories);
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/HomeView.jsp");
         dispatcher.forward(request, response);
     }
