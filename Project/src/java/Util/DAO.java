@@ -46,7 +46,7 @@ public class DAO {
         connectDataBase();
         ResultSet result = null;
         User user = new User();
-        String request = "SELECT TOP(1) * FROM users where userName='" + username + "' AND password='" + password + "'";
+        String request = "SELECT * FROM users where userName='" + username + "' AND password='" + password + "'";
         try {
             Statement stmt = _connection.createStatement();
             result = stmt.executeQuery(request);
@@ -62,7 +62,7 @@ public class DAO {
         connectDataBase();
         ResultSet result = null;
         User user = new User();
-        String request = "SELECT TOP(1) * FROM users where userName='"+username+"' AND password='"+password+"'";
+        String request = "SELECT * FROM users where userName='"+username+"' AND password='"+password+"'";
         try {
             _connection = DriverManager.getConnection("jdbc:mysql://51.83.42.138:3306/database?user=root&password=password");
             Statement stmt = _connection.createStatement();

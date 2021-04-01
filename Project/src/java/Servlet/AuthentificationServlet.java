@@ -92,7 +92,7 @@ public class AuthentificationServlet extends HttpServlet {
                     request.getSession().setAttribute("error", "user");
                 }
             if (isConnect)
-                response.sendRedirect(getServletContext()+"/HomeServlet");
+                response.sendRedirect(request.getContextPath()+"/HomeServlet");
             else{
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/AuthentificationView.jsp");
                 dispatcher.forward(request, response);
@@ -112,12 +112,13 @@ public class AuthentificationServlet extends HttpServlet {
     private boolean connect(HttpServletRequest request, String username, String password ) {
 
         User user = _dao.GetUser(username, password);
-        if(user != null || !user.getFirstName().equals("") ){
+        if(user != null && !user.getFirstName().equals("") ){
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             return true;
         }
         else{
+            
             return false;
         }
     }
