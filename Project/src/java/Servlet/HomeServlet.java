@@ -5,8 +5,15 @@
  */
 package Servlet;
 
+import BusinessObject.Category;
+import Util.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +25,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HomeServlet extends HttpServlet {
 
+    public List<Category> _categories;
+    private DAO dao;
+    
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        _categories = new ArrayList();
+        _categories.add(new Category("test",1));
+//        _categories = dao.getCategory();
+
+    } 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,7 +74,10 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        request.setAttribute("Categories", _categories);
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/HomeView.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -70,7 +91,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect(request.getContextPath()+"/UploaderServlet");
     }
 
     /**

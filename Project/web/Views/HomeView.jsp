@@ -12,6 +12,17 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Authentification réussite!</h1>
+        <header>
+            Home Page
+        </header>
+        <ul>
+            <c:forEach items="${_categories}" var="category">
+                <li>${category.id}<li>
+            </c:forEach>
+        </ul>
+        <form action="${pageContext.request.contextPath}/HomeServlet" method="POST">
+            <input type="submit" name="button" value= "Add" />
+        </form>
+
     </body>
 </html>

@@ -12,6 +12,10 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>Servlet.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploaderServlet</servlet-name>
+        <servlet-class>Servlet.UploaderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/HomeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploaderServlet</servlet-name>
+        <url-pattern>/UploaderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

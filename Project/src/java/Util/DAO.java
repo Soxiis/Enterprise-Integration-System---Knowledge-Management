@@ -5,8 +5,11 @@
  */
 package Util;
 
+import BusinessObject.Category;
 import BusinessObject.User;
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,18 +42,18 @@ public class DAO {
             }
     }
     
-        public User GetUser(String username, String password){
+    public User GetUser(String username, String password) {
         connectDataBase();
         ResultSet result = null;
         User user = new User();
-        String request = "SELECT TOP(1) * FROM users where userName='"+username+"' AND password='"+password+"'";
+        String request = "SELECT TOP(1) * FROM users where userName='" + username + "' AND password='" + password + "'";
         try {
             Statement stmt = _connection.createStatement();
             result = stmt.executeQuery(request);
             user = resultatSetToUser(result);
-            } catch (SQLException e) {
-                Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
-            }
+        } catch (SQLException e) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
+        }
         return user;
     }
     
@@ -78,6 +81,35 @@ public class DAO {
     private User resultatSetToUser(ResultSet result) throws SQLException{
         User user = new User(result.getInt("id"),result.getString("userName"), result.getString("password"));
         return user;
+    }
+
+    public void saveDocument(String name, String path){
+            connectDataBase();
+            Statement statement;
+        try {
+            statement = _connection.createStatement();
+             statement.executeUpdate("INSERT INTO documents (name, path) VALUES ('"+name +"','"+ path+"')");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+    }
+
+    public List<Category> getCategory() {
+        List<Category> category = new LinkedList<Category>();
+        connectDataBase();
+        ResultSet result = null;
+        User user = new User();
+        String request = "SELECT * FROM categories";
+        try {
+            Statement stmt = _connection.createStatement();
+            result = stmt.executeQuery(request);
+            while(result.next()){
+                category.add(new Category(result.getString("userName"), result.getInt("id")));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return category;
     }    
     
  
