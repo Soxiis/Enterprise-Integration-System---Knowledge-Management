@@ -48,7 +48,7 @@ public class DAO {
         User user = new User();
         String request = "SELECT * FROM users where userName='" + username + "' AND password='" + password + "'";
         try {
-            Statement stmt = _connection.createStatement();
+            Statement stmt = _connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             result = stmt.executeQuery(request);
             user = resultatSetToUser(result);
         } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class DAO {
         String request = "SELECT * FROM users where userName='"+username+"' AND password='"+password+"'";
         try {
             _connection = DriverManager.getConnection("jdbc:mysql://51.83.42.138:3306/database?user=root&password=password");
-            Statement stmt = _connection.createStatement();
+            Statement stmt = _connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             result = stmt.executeQuery(request);
             int i = result.getRow();
             if (i >= i)
@@ -79,6 +79,7 @@ public class DAO {
     }
 
     private User resultatSetToUser(ResultSet result) throws SQLException{
+        result.next();
         User user = new User(result.getInt("id"),result.getString("userName"), result.getString("password"));
         return user;
     }

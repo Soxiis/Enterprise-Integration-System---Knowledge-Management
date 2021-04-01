@@ -10,8 +10,10 @@ import Util.DAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,18 @@ public class UploaderServlet extends HttpServlet {
     private DAO _dao;    
     private String uploadPath;
     private List<Category> _categorieList;
+    
+    
+        @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        uploadPath = getServletContext().getRealPath(DOCUMENT_FOLDER);
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+    } 
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,13 +83,9 @@ public class UploaderServlet extends HttpServlet {
             throws ServletException, IOException {
 //        _dao = DAO.getInstance();
 //        _categorieList =  _dao.getCategory();
-        uploadPath = getServletContext().getRealPath(DOCUMENT_FOLDER);
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
+
         
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/UploaderView.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(request.getContextPath()+ "/Views/UploaderView.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -91,7 +101,7 @@ public class UploaderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+       
             String button = request.getParameter("button");
 
         if (button.equals("Add")) {
@@ -102,6 +112,7 @@ public class UploaderServlet extends HttpServlet {
                 String fileName = getFileName(part);
                 String fullPath = uploadPath + File.separator + fileName;
                 part.write(fullPath);
+                response.sendRedirect(request.getContextPath()+"/HomeServlet");
 //                _dao.saveDocument(fileName, fullPath);
             }
         }

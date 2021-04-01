@@ -15,16 +15,23 @@ import java.util.UUID;
 public class User {
 
     private int _id;
-    private String _lastName;
-    private String _firstName;
+    private String _userName = "";
+    private String _password  = "";
+    private String _lastName = "";
+    private String _firstName = "";
     private Role _role;
-    private String _adresse;
-    private String _mail;
-    private String _phone;
+    private String _adresse = "";
+    private String _mail  = "";
+    private String _phone  = "";
 
     public User() {
+        
     }
     
+        public User(String _userName, String _password) {
+        this._userName = _userName;
+        this._password = _password;
+    }
     
 
     public User(int _id, String _lastName, String _firstName, Role _role, String _adresse, String _mail, String _phone) {
@@ -36,7 +43,7 @@ public class User {
         this._mail = _mail;
         this._phone = _phone;
     }
-        public User(int _id, String _lastName, String _firstName) {
+        public User(int _id, String _userName, String _password) {
         this._id = _id;
         this._lastName = _lastName;
         this._firstName = _firstName;
