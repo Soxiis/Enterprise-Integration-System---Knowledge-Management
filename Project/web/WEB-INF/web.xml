@@ -17,10 +17,10 @@
         <servlet-class>Servlet.UploaderServlet</servlet-class>
         <init-param>
             <param-name>chemin</param-name>
-            <param-value>/fichiers/</param-value>
+            <param-value>/home/ubuntu/Fichiers/</param-value>
         </init-param>
         <multipart-config>
-            <location>c:/fichiers</location>
+            <location>/home/ubuntu/Fichiers/</location>
             <max-file-size>10485760</max-file-size>
             <!-- 10 Mo -->
             <max-request-size>52428800</max-request-size>
@@ -33,9 +33,13 @@
         <servlet-name>Download</servlet-name>
         <servlet-class>Util.Download</servlet-class>
         <init-param>
-		<param-name>chemin</param-name> 
-		<param-value>/fichiers/</param-value> 
-	</init-param>
+            <param-name>chemin</param-name>
+            <param-value>/home/ubuntu/Fichiers/</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>DocumentTechnique</servlet-name>
+        <servlet-class>Servlet.DocumentTechnique</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
@@ -55,7 +59,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Download</servlet-name>
-        <url-pattern>/fichiers/*</url-pattern>
+        <url-pattern>/Fichiers/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentTechnique</servlet-name>
+        <url-pattern>/DocumentTechnique</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

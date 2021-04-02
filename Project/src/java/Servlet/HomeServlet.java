@@ -7,6 +7,7 @@ package Servlet;
 
 import BusinessObject.Category;
 import Util.DAO;
+import com.mysql.cj.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,9 +34,10 @@ public class HomeServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         _categories = new ArrayList();
-        _categories.add(new Category("test",1));
+        _categories.add(new Category("DocumentTechnique",1));
+ 
 //        _categories = dao.getCategory();
-
+       
     } 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +48,7 @@ public class HomeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
+  
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,7 +62,10 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                        request.getSession().setAttribute("Categories", _categories);
+         request.setAttribute("_categories", _categories);
+         
+              HttpSession session = request.getSession();
+   
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/HomeView.jsp");
         dispatcher.forward(request, response);
     }
