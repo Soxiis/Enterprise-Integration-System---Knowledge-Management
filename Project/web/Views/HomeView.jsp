@@ -16,7 +16,7 @@
             Home Page
         </header>
         <ul>
-            <c:forEach items="${_categories}" var="category">
+            <c:forEach items="${Categorie}" var="category">
                 <li>${category.id}<li>
             </c:forEach>
         </ul>

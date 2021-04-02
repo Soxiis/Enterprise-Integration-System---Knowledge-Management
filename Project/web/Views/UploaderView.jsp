@@ -37,16 +37,23 @@
             <h1>Choose you file to import.</h1>
         </header>
         
-        <form method="post" action="/UploaderServlet" enctype="multipart/form-data">
+        <form method="POST" action="${pageContext.request.contextPath}/UploaderServlet">
             <table>
                 <tr>
                    <td>Categories</td>
-                   <td><input type="text" name="categories" /> </td>
-                   <input type="submit" name="button" value="Add" />
+                   <td><input type="text" name="cat" /> </td>
+                   <td><input type="submit" name="but" value="add"/><td>
+                    <%! String s1 = ""; %>
+                    <% s1 = session.getAttribute("categoriesToString") == null ? "" : (String)session.getAttribute("categoriesToString"); %>
+                           <% if(s1.equals("process")){ %>
+                           <td><p style="color : blue">Category : Process</td></div>
+                           <% } %>
                 </tr>
             </table>
+        </form>
+            <form method="POST" action="${pageContext.request.contextPath}/UploaderServlet" enctype="multipart/form-data">
             Fichiers sélectionnés : 
-            <input type="file" name="multiPartServlet" accept="application/*" multiple
+            <input type="file" name="fichier" accept="application/*" multiple
                    onchange="readFilesAndDisplayPreview(this.files);" /> <br/>
             <input type="submit" name="button" value="Upload" /> <br/>        
             

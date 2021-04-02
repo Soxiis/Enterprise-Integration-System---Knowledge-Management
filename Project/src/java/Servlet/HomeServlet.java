@@ -62,7 +62,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                        request.setAttribute("Categories", _categories);
+                        request.getSession().setAttribute("Categories", _categories);
         RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/Views/HomeView.jsp");
         dispatcher.forward(request, response);
     }

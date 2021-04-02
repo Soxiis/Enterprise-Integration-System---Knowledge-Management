@@ -112,7 +112,7 @@ public class DAO {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return category;
-    }    
+    }
     
  
 }

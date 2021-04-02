@@ -5,17 +5,22 @@
  */
 package BusinessObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Utilisateur
  */
-public class Category {
+public class Category implements Serializable {
     
     private String name;
     private int id;
     private List<Document> documentList;
+
+    public Category() {
+    }
+    
 
     public Category(String name, int id) {
         this.name = name;
